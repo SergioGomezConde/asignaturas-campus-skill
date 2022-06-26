@@ -66,7 +66,7 @@ class AsignaturasCampus(MycroftSkill):
 
         for elemento in elementos:
             nombre_asignatura = elemento.text.split(' (')[0].capitalize()
-            if (len(nombre_asignatura) == 0) or ("grado" not in nombre_asignatura):
+            if (nombre_asignatura == "") or ("grado" not in nombre_asignatura):
                 informacion['asignaturas'].append({
                     'nombre': elemento.text.split(' (')[0].capitalize()
             })
