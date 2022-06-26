@@ -5,6 +5,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
+# Fichero JSON donde almacenar la informacion
+ficheroJSON = "/home/serggom/data.json"
+informacion = {'asignaturas': [], 'usuario': [], 'eventos': [], 'mensajes': []}
+
 
 def inicio_sesion(self):
     # Datos de acceso fijos
@@ -59,12 +63,26 @@ class AsignaturasCampus(MycroftSkill):
         elementos = driver.find_element(
             by=By.XPATH, value='/html/body/div[4]/div[2]/div/div/section/div/div/div/div[2]/div/div/div/div[1]').find_elements(by=By.TAG_NAME, value='a')
 
-        self.speak("Sus asignaturas son las siguientes:")
-
-        # Respuesta con las asignaturas
         for elemento in elementos:
-            if len(elemento.text) > 0:
-                self.speak(elemento.text.split(' (')[0].capitalize())
+            informacion['asignaturas'].append({
+                'nombre': elemento.text.split(' (')[0].capitalize()
+            })
+
+        with open(ficheroJSON, 'w') as ficheroDatos:
+                json.dump(informacion, ficheroDatos, indent=4)
+
+        # Lectura de la informacion del fichero JSON
+        with open(ficheroJSON) as ficheroAsignaturas:
+            data = json.load(ficheroAsignaturas)
+            self.speak("Sus asignaturas son las siguientes:")
+
+            for subject in data['asignaturas']:
+                self.speak(subject['nombre'])
+
+        # # Respuesta con las asignaturas
+        # for elemento in elementos:
+        #     if len(elemento.text) > 0:
+        #         self.speak(elemento.text.split(' (')[0].capitalize())
 
 
 def create_skill():
