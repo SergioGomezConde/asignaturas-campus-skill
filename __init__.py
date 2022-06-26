@@ -65,8 +65,10 @@ class AsignaturasCampus(MycroftSkill):
             by=By.XPATH, value='/html/body/div[4]/div[2]/div/div/section/div/div/div/div[2]/div/div/div/div[1]').find_elements(by=By.TAG_NAME, value='a')
 
         for elemento in elementos:
-            informacion['asignaturas'].append({
-                'nombre': elemento.text.split(' (')[0].capitalize()
+            nombre_asignatura = elemento.text.split(' (')[0].capitalize()
+            if (len(nombre_asignatura) == 0) or ("grado" not in nombre_asignatura):
+                informacion['asignaturas'].append({
+                    'nombre': elemento.text.split(' (')[0].capitalize()
             })
 
         with open(ficheroJSON, 'w') as ficheroDatos:
