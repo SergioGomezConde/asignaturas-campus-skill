@@ -77,7 +77,7 @@ class AsignaturasCampus(MycroftSkill):
         # Lectura de la informacion del fichero JSON
         with open(ficheroJSON) as ficheroAsignaturas:
             data = json.load(ficheroAsignaturas)
-            self.speak("Sus asignaturas son las siguientes:")
+            self.speak("En el curso actual estás matriculado en las siguientes asignaturas:")
 
             for subject in data['asignaturas']:
                 self.speak(subject['nombre'])
