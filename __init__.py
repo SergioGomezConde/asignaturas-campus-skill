@@ -1,4 +1,3 @@
-import time
 import json
 
 from mycroft import MycroftSkill, intent_file_handler
@@ -12,7 +11,6 @@ class AsignaturasCampus(MycroftSkill):
 
     @intent_file_handler('campus.asignaturas.intent')
     def handle_campus_asignaturas(self, message):
-
         # Lectura de la informacion del fichero JSON
         with open(ficheroJSON) as ficheroAsignaturas:
             data = json.load(ficheroAsignaturas)
