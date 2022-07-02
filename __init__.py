@@ -25,6 +25,8 @@ class AsignaturasCampus(MycroftSkill):
                 for subject in data['asignaturas']:
                     self.speak(subject['nombre'])
 
+            ficheroAsignaturas.close()
+
         else:
             self.speak("Lo siento, no dispongo de esa información")
 
